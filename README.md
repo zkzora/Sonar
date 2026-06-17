@@ -36,7 +36,7 @@ Sonar is a non-custodial, read-only agent. It never touches your wallet or your 
 
 | Protocol | Type | Status |
 |----------|------|--------|
-| Zest | Lending · sBTC collateral | ✅ Live |
+| Zest | Lending · sBTC collateral | 🔜 Coming Soon |
 | Granite | Lending · sBTC collateral | 🔄 In Progress |
 | Velar Perps | Perpetuals · sBTC | 🗓 Planned |
 

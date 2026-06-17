@@ -19,7 +19,7 @@ const FEATURES = [
 const FAQS = [
   { q: 'What is a health factor?', a: 'A ratio showing how safe your position is. Below 1.0 means liquidated. Sonar alerts you before you get there.' },
   { q: 'Does Sonar need my private key or wallet?', a: 'No. Sonar reads on-chain state via public read-only calls. You provide your wallet address, not your wallet.' },
-  { q: 'Which protocols are supported?', a: 'Zest is live at launch. Granite is coming next. More protocols are planned after that.' },
+  { q: 'Which protocols are supported?', a: 'Zest is the first protocol Sonar will support at launch. Granite is coming next. More protocols are planned after that.' },
   { q: 'How fast are alerts?', a: 'Position checks run continuously. Alert delivery via Telegram or email arrives within seconds of a threshold breach.' },
   { q: 'What happens if Sonar misses an alert?', a: 'Sonar provides best-effort monitoring, not guaranteed liquidation prevention. Always maintain a safe health buffer.' },
 ]
@@ -258,10 +258,10 @@ export default function Home() {
         <section style={{ padding: 'clamp(48px,6vw,72px) clamp(20px,5vw,40px)', borderBottom: '1px solid rgba(0,0,0,.1)' }}>
           <div data-reveal="1" data-reveal-delay="0" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: '16px', marginBottom: '34px' }}>
             <div>
-              <div style={{ fontFamily: "'Space Mono'", fontSize: '11px', letterSpacing: '.16em', color: '#8a8a85', marginBottom: '14px' }}>LIVE COVERAGE</div>
+              <div style={{ fontFamily: "'Space Mono'", fontSize: '11px', letterSpacing: '.16em', color: '#8a8a85', marginBottom: '14px' }}>PROTOCOL COVERAGE</div>
               <h2 style={{ fontFamily: "'Space Grotesk'", fontWeight: 600, fontSize: 'clamp(28px,3.4vw,34px)', letterSpacing: '-.02em' }}>Protocols Sonar watches.</h2>
             </div>
-            <div style={{ fontFamily: "'Space Mono'", fontSize: '11px', color: '#a0a09a' }}>[ 01 / 03 ACTIVE ]</div>
+            <div style={{ fontFamily: "'Space Mono'", fontSize: '11px', color: '#a0a09a' }}>[ 03 PROTOCOLS ]</div>
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(240px,1fr))', gap: '18px', alignItems: 'stretch' }}>
 
@@ -274,8 +274,8 @@ export default function Home() {
               <div style={{ fontFamily: "'Space Mono'", fontSize: '12px', color: '#555', marginBottom: '8px' }}>Lending · sBTC collateral</div>
               <div style={{ fontFamily: "'Space Mono'", fontSize: '12px', color: '#222' }}>$75.9M TVL</div>
               <div style={{ marginTop: 'auto', paddingTop: '20px', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#22C55E', animation: 'son-blink 2s ease-in-out infinite' }} />
-                <span style={{ fontFamily: "'Space Mono'", fontSize: '11px', letterSpacing: '.1em', color: '#1a8a40' }}>LIVE</span>
+                <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#EAB308' }} />
+                <span style={{ fontFamily: "'Space Mono'", fontSize: '11px', letterSpacing: '.1em', color: '#8a8a85' }}>COMING SOON</span>
               </div>
             </div>
 

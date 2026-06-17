@@ -155,7 +155,7 @@ export default function Dashboard() {
           <div style={{ padding: '18px 22px 22px', borderTop: '1px solid rgba(255,255,255,.14)' }}>
             <div style={{ fontFamily: "'Space Mono'", fontSize: '9.5px', letterSpacing: '.16em', color: '#6c6c68', marginBottom: '12px' }}>STATUS</div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontFamily: "'Space Mono'", fontSize: '11.5px', color: '#e6e6e2', marginBottom: '6px' }}>
-              <span style={{ width: '7px', height: '7px', background: '#22C55E', borderRadius: '50%' }} />MAINNET LIVE
+              <span style={{ width: '7px', height: '7px', background: '#EAB308', borderRadius: '50%' }} />IN DEVELOPMENT
             </div>
             <div style={{ fontFamily: "'Space Mono'", fontSize: '10.5px', color: '#8c8c88', marginBottom: '18px' }}>Last sync: {sync}s ago</div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', fontFamily: "'Space Mono'", fontSize: '11px', color: '#b6b6b2' }}>
