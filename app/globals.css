@@ -1,0 +1,90 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: #F0EFEB; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+a { text-decoration: none; color: inherit; }
+button { font-family: inherit; }
+::placeholder { color: #b3b1a8; }
+
+@keyframes son-sweep {
+  0%   { left: -6%; opacity: 0; }
+  10%  { opacity: .85; }
+  90%  { opacity: .85; }
+  100% { left: 104%; opacity: 0; }
+}
+@keyframes son-blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: .3; }
+}
+@keyframes son-spin {
+  to { transform: rotate(360deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+}
+
+/* ── Landing hover utilities ── */
+.son-link-underline {
+  background-image: linear-gradient(#FF5C00, #FF5C00);
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  background-size: 0% 1.4px;
+  padding-bottom: 3px;
+  transition: background-size .18s ease, color .18s ease;
+}
+.son-link-underline:hover { background-size: 100% 1.4px; color: #0D0D0D; }
+
+.son-btn-orange { transition: transform .15s ease, box-shadow .15s ease; }
+.son-btn-orange:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(255,92,0,.30); }
+
+.son-btn-orange-sm { transition: transform .15s ease, box-shadow .15s ease; }
+.son-btn-orange-sm:hover { transform: translateY(-1px); box-shadow: 0 6px 16px rgba(255,92,0,.30); }
+
+.son-btn-outline-dark { transition: border-color .15s ease, color .15s ease; }
+.son-btn-outline-dark:hover { border-color: #FF5C00; color: #FF5C00; }
+
+.son-btn-outline-white { transition: border-color .15s ease, color .15s ease; }
+.son-btn-outline-white:hover { border-color: #FF5C00; color: #FF5C00; }
+
+.son-card-hover { transition: border-color .15s ease; }
+.son-card-hover:hover { border-color: rgba(0,0,0,.45); }
+
+.son-faq-btn:hover { background: rgba(0,0,0,.025); }
+
+.son-alert-cta { transition: transform .15s ease, box-shadow .15s ease; }
+.son-alert-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 18px rgba(255,92,0,.28); }
+
+/* ── Dashboard hover utilities ── */
+.son-nav-btn { transition: color .15s ease, background .15s ease; }
+.son-nav-btn:not([data-disabled="true"]):hover { color: #fff; background: rgba(255,255,255,.04); }
+
+.son-clear-btn { transition: background .15s ease, color .15s ease; }
+.son-clear-btn:hover { background: #FF5C00; color: #fff; }
+
+.son-add-wallet-btn { transition: background .15s ease, color .15s ease; }
+.son-add-wallet-btn:hover { background: #FF5C00; color: #fff; }
+
+.son-sidebar-link { transition: color .15s ease; }
+.son-sidebar-link:hover { color: #fff !important; }
+
+.son-pos-btn-outline { transition: border-color .15s ease, color .15s ease; }
+.son-pos-btn-outline:hover { border-color: #FF5C00; color: #FF5C00; }
+
+.son-pos-btn-alert { transition: transform .15s ease, box-shadow .15s ease; }
+.son-pos-btn-alert:hover { transform: translateY(-1px); box-shadow: 0 5px 14px rgba(255,92,0,.28); }
+
+.son-alert-dismiss { transition: color .15s ease; }
+.son-alert-dismiss:hover { color: #EF4444; }
+
+.son-threshold-opt { transition: background .15s ease; }
+.son-threshold-opt:hover { background: #F4F2EC; }
+
+.son-start-btn { transition: transform .15s ease, box-shadow .15s ease; }
+.son-start-btn:not(:disabled):hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(255,92,0,.3); }
+
+.son-view-all-btn { transition: color .15s ease; }
+.son-view-all-btn:hover { color: #FF5C00; }
+
+.son-wallet-input:focus { border-color: #FF5C00; outline: none; }
+
+.son-add-position-btn { transition: background .15s ease, color .15s ease; }
+.son-add-position-btn:hover { background: #FF5C00; color: #fff; }
