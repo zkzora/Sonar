@@ -113,7 +113,7 @@ export default function Home() {
             <span style={{ fontFamily: "'Space Grotesk'", fontWeight: 700, fontSize: '19px', letterSpacing: '.22em' }}>SONAR</span>
           </a>
           <div style={{ display: 'flex', alignItems: 'center', gap: 'clamp(14px,3vw,28px)' }}>
-            <a href="#" className="son-link-underline" style={{ fontFamily: "'Space Mono', monospace", fontSize: '12px', letterSpacing: '.06em', color: '#444' }}>
+            <a href="https://x.com/sonaragent_" target="_blank" rel="noopener noreferrer" className="son-link-underline" style={{ fontFamily: "'Space Mono', monospace", fontSize: '12px', letterSpacing: '.06em', color: '#444' }}>
               X / Twitter <span style={{ fontSize: '11px' }}>↗</span>
             </a>
             <a href="#" className="son-btn-orange-sm" style={{ fontFamily: "'Space Mono', monospace", fontSize: '12px', letterSpacing: '.08em', textTransform: 'uppercase', background: '#FF5C00', color: '#fff', padding: '10px 16px', borderRadius: '3px', display: 'inline-flex', alignItems: 'center', gap: '8px', whiteSpace: 'nowrap' }}>
@@ -399,7 +399,7 @@ export default function Home() {
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px', padding: '22px 0', borderTop: '1px solid rgba(255,255,255,.14)' }}>
             <div style={{ fontFamily: "'Space Mono'", fontSize: '11.5px', letterSpacing: '.08em', color: '#9a9a96' }}>SONAR · Built on Stacks · Non-custodial</div>
             <div style={{ display: 'flex', gap: '22px', fontFamily: "'Space Mono'", fontSize: '11.5px', letterSpacing: '.08em', color: '#cfcfca' }}>
-              <a href="#" className="son-sidebar-link">X / Twitter ↗</a>
+              <a href="https://x.com/sonaragent_" target="_blank" rel="noopener noreferrer" className="son-sidebar-link">X / Twitter ↗</a>
               <a href="#" className="son-sidebar-link">Telegram ↗</a>
             </div>
           </div>
