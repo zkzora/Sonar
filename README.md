@@ -51,35 +51,6 @@ Sonar is a non-custodial, read-only agent. It never touches your wallet or your 
 
 ---
 
-## Local Development
-
-```bash
-# Install dependencies
-npm install
-
-# Build and run
-npm run build
-npm start
-
-# Dev mode (run build first to avoid cache issues on Windows)
-npm run build && npm run dev
-```
-
-Open [http://localhost:3000](http://localhost:3000).
-
----
-
-## Deploy to Vercel
-
-Push to GitHub, then import the repo at [vercel.com](https://vercel.com). Zero config — Next.js is auto-detected.
-
-```bash
-# Or deploy directly from CLI
-npx vercel
-```
-
----
-
 ## Disclaimer
 
 Sonar provides best-effort monitoring, not guaranteed liquidation prevention. Always maintain a safe health factor buffer. Not financial advice.
