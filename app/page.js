@@ -318,37 +318,69 @@ export default function Home() {
               <h2 style={{ fontFamily: "'Space Grotesk'", fontWeight: 600, fontSize: 'clamp(30px,3.8vw,38px)', lineHeight: 1.06, letterSpacing: '-.02em', marginBottom: '20px' }}>An alert that<br />explains itself.</h2>
               <p style={{ fontSize: '16px', lineHeight: 1.6, color: '#444', maxWidth: '360px' }}>No cryptic numbers. Every Sonar alert tells you what changed, why it changed, and exactly what to do next — in plain English.</p>
             </div>
-            <div data-reveal="1" data-reveal-delay="120" data-reveal-dist="8" style={{ position: 'relative', flex: '1.1 1 360px', background: '#fff', border: '1px solid rgba(0,0,0,.14)', borderLeft: '4px solid #FF5C00' }}>
-              <span style={{ position: 'absolute', top: '-1px', right: '-1px', width: '14px', height: '14px', borderTop: '2px solid #FF5C00', borderRight: '2px solid #FF5C00' }} />
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '14px 22px', borderBottom: '1px solid rgba(0,0,0,.1)', background: '#FAFAF7' }}>
+            <div data-reveal="1" data-reveal-delay="120" data-reveal-dist="8" style={{ position: 'relative', flex: '1.1 1 360px', background: '#fff', border: '1px solid rgba(0,0,0,.18)' }}>
+              {/* corner registration marks */}
+              <span style={{ position: 'absolute', top: '-1px', left: '-1px', width: '11px', height: '11px', borderTop: '2px solid #0D0D0D', borderLeft: '2px solid #0D0D0D' }} />
+              <span style={{ position: 'absolute', top: '-1px', right: '-1px', width: '11px', height: '11px', borderTop: '2px solid #0D0D0D', borderRight: '2px solid #0D0D0D' }} />
+              <span style={{ position: 'absolute', bottom: '-1px', left: '-1px', width: '11px', height: '11px', borderBottom: '2px solid #0D0D0D', borderLeft: '2px solid #0D0D0D' }} />
+              <span style={{ position: 'absolute', bottom: '-1px', right: '-1px', width: '11px', height: '11px', borderBottom: '2px solid #0D0D0D', borderRight: '2px solid #0D0D0D' }} />
+
+              {/* header */}
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '13px 20px', borderBottom: '1px solid rgba(0,0,0,.16)' }}>
                 <span style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                  <span style={{ width: '9px', height: '9px', background: '#FF5C00', borderRadius: '50%', animation: 'son-blink 1.4s ease-in-out infinite' }} />
-                  <span style={{ fontFamily: "'Space Mono'", fontSize: '12px', fontWeight: 700, letterSpacing: '.14em' }}>SONAR ALERT</span>
+                  <span style={{ width: '8px', height: '8px', background: '#FF5C00', animation: 'son-blink 1.4s ease-in-out infinite' }} />
+                  <span style={{ fontFamily: "'Space Mono'", fontSize: '12px', fontWeight: 700, letterSpacing: '.2em' }}>SONAR ALERT</span>
                 </span>
-                <span style={{ fontFamily: "'Space Mono'", fontSize: '10.5px', letterSpacing: '.08em', color: '#a0a09a' }}>23:14 UTC · ZEST</span>
+                <span style={{ fontFamily: "'Space Mono'", fontSize: '10px', letterSpacing: '.06em', color: '#9a9a96' }}>23:14 UTC</span>
               </div>
-              <div style={{ padding: '22px' }}>
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '12px', flexWrap: 'wrap', marginBottom: '14px' }}>
-                  <div style={{ display: 'flex', alignItems: 'baseline', gap: '9px' }}>
-                    <span style={{ fontFamily: "'Space Mono'", fontSize: '10px', letterSpacing: '.12em', color: '#8a8a85' }}>HF</span>
-                    <span style={{ fontFamily: "'Space Grotesk'", fontWeight: 700, fontSize: '21px', lineHeight: 1, color: '#EAB308' }}>1.12</span>
-                    <span style={{ fontFamily: "'Space Mono'", color: '#bbb' }}>→</span>
-                    <span style={{ fontFamily: "'Space Grotesk'", fontWeight: 700, fontSize: '21px', lineHeight: 1, color: '#FF5C00' }}>1.00</span>
-                  </div>
-                  <span style={{ fontFamily: "'Space Mono'", fontSize: '9.5px', letterSpacing: '.05em', color: '#FF5C00', fontWeight: 700, border: '1px solid rgba(255,92,0,.45)', padding: '4px 7px', background: 'rgba(255,92,0,.06)' }}>⚠ APPROACHING</span>
+
+              {/* spec cells: protocol / status */}
+              <div style={{ display: 'flex', borderBottom: '1px solid rgba(0,0,0,.16)' }}>
+                <div style={{ flex: 1, padding: '11px 20px', borderRight: '1px solid rgba(0,0,0,.16)' }}>
+                  <div style={{ fontFamily: "'Space Mono'", fontSize: '8.5px', letterSpacing: '.16em', color: '#a0a09a', marginBottom: '5px' }}>PROTOCOL</div>
+                  <div style={{ fontFamily: "'Space Mono'", fontSize: '12.5px', fontWeight: 700, letterSpacing: '.08em' }}>ZEST</div>
                 </div>
-                <div style={{ position: 'relative', height: '8px', background: '#EFEDE6', backgroundImage: 'repeating-linear-gradient(90deg,rgba(0,0,0,.13) 0 1px,transparent 1px 10%)', marginBottom: '20px' }}>
-                  <div style={{ position: 'absolute', left: 0, top: 0, bottom: 0, width: '89%', background: '#EAB308' }} />
-                  <div style={{ position: 'absolute', right: 0, top: '-2px', bottom: '-2px', width: '2px', background: '#EF4444' }} />
+                <div style={{ flex: 1, padding: '11px 20px' }}>
+                  <div style={{ fontFamily: "'Space Mono'", fontSize: '8.5px', letterSpacing: '.16em', color: '#a0a09a', marginBottom: '5px' }}>STATUS</div>
+                  <div style={{ fontFamily: "'Space Mono'", fontSize: '12.5px', fontWeight: 700, letterSpacing: '.06em', color: '#FF5C00' }}>APPROACHING</div>
                 </div>
-                <p style={{ fontSize: '15px', lineHeight: 1.6, color: '#222', marginBottom: '18px' }}>Your <strong>Zest</strong> position is nearing the liquidation threshold.</p>
-                <div style={{ display: 'grid', gridTemplateColumns: 'auto 1fr', gap: '12px 16px', alignItems: 'baseline', borderTop: '1px solid rgba(0,0,0,.1)', paddingTop: '18px', marginBottom: '22px' }}>
-                  <div style={{ fontFamily: "'Space Mono'", fontSize: '10.5px', letterSpacing: '.1em', color: '#FF5C00', fontWeight: 700 }}>WHY</div>
-                  <p style={{ fontSize: '14px', lineHeight: 1.55, color: '#444' }}>sBTC dropped <span style={{ fontFamily: "'Space Mono'", fontSize: '12.5px', color: '#EF4444', background: 'rgba(239,68,68,.08)', padding: '1px 5px' }}>−6.4%</span> in 3h — collateral fell <span style={{ fontFamily: "'Space Mono'", fontSize: '12.5px', background: 'rgba(0,0,0,.05)', padding: '1px 5px' }}>$8,420</span> → <span style={{ fontFamily: "'Space Mono'", fontSize: '12.5px', background: 'rgba(0,0,0,.05)', padding: '1px 5px' }}>$7,880</span>.</p>
-                  <div style={{ fontFamily: "'Space Mono'", fontSize: '10.5px', letterSpacing: '.1em', color: '#0D0D0D', fontWeight: 700 }}>ACTION</div>
-                  <p style={{ fontSize: '14px', lineHeight: 1.55, color: '#444' }}>Add <span style={{ fontFamily: "'Space Mono'", fontSize: '12.5px', background: 'rgba(0,0,0,.05)', padding: '1px 5px' }}>$540</span> collateral or repay <span style={{ fontFamily: "'Space Mono'", fontSize: '12.5px', background: 'rgba(0,0,0,.05)', padding: '1px 5px' }}>$300</span> to restore a safe buffer.</p>
+              </div>
+
+              {/* health factor readout */}
+              <div style={{ padding: '20px 20px 4px' }}>
+                <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', marginBottom: '12px' }}>
+                  <span style={{ fontFamily: "'Space Mono'", fontSize: '9px', letterSpacing: '.16em', color: '#8a8a85' }}>HEALTH FACTOR</span>
+                  <span style={{ display: 'flex', alignItems: 'baseline', gap: '8px' }}>
+                    <span style={{ fontFamily: "'Space Grotesk'", fontWeight: 600, fontSize: '20px', lineHeight: 1, color: '#EAB308' }}>1.12</span>
+                    <span style={{ fontFamily: "'Space Mono'", fontSize: '12px', color: '#c4c4be' }}>→</span>
+                    <span style={{ fontFamily: "'Space Grotesk'", fontWeight: 600, fontSize: '20px', lineHeight: 1, color: '#FF5C00' }}>1.00</span>
+                  </span>
                 </div>
-                <a href="#" className="son-alert-cta" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: '#FF5C00', color: '#fff', fontFamily: "'Space Mono'", fontSize: '12px', letterSpacing: '.06em', padding: '11px 18px', borderRadius: '3px' }}>→ Open Zest</a>
+                {/* proximity track */}
+                <div style={{ position: 'relative', height: '5px', background: '#ECEAE3', marginBottom: '6px' }}>
+                  <div style={{ position: 'absolute', left: 0, top: 0, bottom: 0, width: '88%', background: 'linear-gradient(90deg,#EAB308,#FF5C00)' }} />
+                  <div style={{ position: 'absolute', right: 0, top: '-3px', bottom: '-3px', width: '2px', background: '#EF4444' }} />
+                </div>
+                <div style={{ display: 'flex', justifyContent: 'space-between', fontFamily: "'Space Mono'", fontSize: '9px', letterSpacing: '.06em', color: '#a0a09a' }}>
+                  <span>SAFE</span>
+                  <span style={{ color: '#EF4444' }}>LIQUIDATION 1.00</span>
+                </div>
+              </div>
+
+              {/* explanation */}
+              <div style={{ padding: '18px 20px 0' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'auto 1fr', gap: '12px 16px', alignItems: 'baseline' }}>
+                  <div style={{ fontFamily: "'Space Mono'", fontSize: '10px', letterSpacing: '.12em', color: '#FF5C00', fontWeight: 700 }}>WHY</div>
+                  <p style={{ fontSize: '13.5px', lineHeight: 1.55, color: '#3a3a3a' }}>sBTC dropped <span style={{ fontFamily: "'Space Mono'", fontSize: '12px', color: '#EF4444', background: 'rgba(239,68,68,.08)', padding: '1px 5px' }}>−6.4%</span> in 3h — collateral fell <span style={{ fontFamily: "'Space Mono'", fontSize: '12px', background: 'rgba(0,0,0,.05)', padding: '1px 5px' }}>$8,420</span> → <span style={{ fontFamily: "'Space Mono'", fontSize: '12px', background: 'rgba(0,0,0,.05)', padding: '1px 5px' }}>$7,880</span></p>
+                  <div style={{ fontFamily: "'Space Mono'", fontSize: '10px', letterSpacing: '.12em', color: '#0D0D0D', fontWeight: 700 }}>ACTION</div>
+                  <p style={{ fontSize: '13.5px', lineHeight: 1.55, color: '#3a3a3a' }}>Add <span style={{ fontFamily: "'Space Mono'", fontSize: '12px', background: 'rgba(0,0,0,.05)', padding: '1px 5px' }}>$540</span> collateral or repay <span style={{ fontFamily: "'Space Mono'", fontSize: '12px', background: 'rgba(0,0,0,.05)', padding: '1px 5px' }}>$300</span> to restore buffer</p>
+                </div>
+              </div>
+
+              {/* CTA bar */}
+              <div style={{ display: 'flex', alignItems: 'stretch', borderTop: '1px solid rgba(0,0,0,.16)', marginTop: '20px' }}>
+                <div style={{ flex: 1, display: 'flex', alignItems: 'center', padding: '0 20px', fontFamily: "'Space Mono'", fontSize: '9.5px', letterSpacing: '.1em', color: '#a0a09a' }}>ALERT_01 · AUTO-SENT</div>
+                <a href="#" className="son-alert-cta" style={{ display: 'inline-flex', alignItems: 'center', gap: '9px', background: '#FF5C00', color: '#fff', fontFamily: "'Space Mono'", fontSize: '12px', fontWeight: 700, letterSpacing: '.08em', padding: '15px 22px' }}>OPEN ZEST <span style={{ fontSize: '13px' }}>→</span></a>
               </div>
             </div>
           </div>
