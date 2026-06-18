@@ -12,8 +12,37 @@ const ALERT_DEF = [
 
 function hfColor(hf) { return hf >= 1.5 ? '#22C55E' : hf >= 1.1 ? '#EAB308' : '#EF4444' }
 
+// Map the live /api/positions account into the card shape the dashboard renders.
+function accountToPositions(acc, sync) {
+  if (!acc || !acc.hasPosition) return []
+  const fmtUSD = (n) => '$' + Math.round(n).toLocaleString('en-US')
+  const label = (sym) => sym.toLowerCase().includes('sbtc')
+    ? 'sBTC'
+    : sym.replace(/^token-/, '').replace(/-v\d.*$/, '').toUpperCase()
+  const col = acc.collateralRows
+  const collateralStr = col.length === 0 ? '—'
+    : col.length === 1
+      ? `${col[0].amount.toFixed(col[0].symbol.toLowerCase().includes('sbtc') ? 6 : 2)} ${label(col[0].symbol)}`
+      : fmtUSD(acc.collateralUSD)
+  const hf = acc.hf // number | null  (null = no debt → ∞)
+  const warn = hf != null && hf < 1.2
+  const note = hf == null
+    ? `No debt — not at liquidation risk · synced ${sync}s ago`
+    : `Live from Zest v2 mainnet · synced ${sync}s ago`
+  return [{
+    id: 'zest',
+    protocol: 'ZEST PROTOCOL',
+    hf,
+    warn,
+    collateral: collateralStr,
+    borrowed: acc.debtUSD > 0 ? fmtUSD(acc.debtUSD) : '$0',
+    liqPrice: acc.liqPrice ? fmtUSD(acc.liqPrice) : '—',
+    note,
+  }]
+}
+
 export default function Dashboard() {
-  const SAMPLE_WALLET = 'SP2J6ZY48GV1EZ5V2V5RB9MP66SW86PYKKNZ9V8F4K'
+  const SAMPLE_WALLET = 'SP2GHQRCRMYY4S8PMBR49BEKX144VR437YT42SF3B'
 
   const [wallet,         setWallet]         = useState(SAMPLE_WALLET)
   const [inputVal,       setInputVal]       = useState('')
@@ -21,9 +50,12 @@ export default function Dashboard() {
   const [activeNav,      setActiveNav]      = useState('overview')
   const [sync,           setSync]           = useState(12)
   const [openDropdownId, setOpenDropdownId] = useState(null)
-  const [thresholds,     setThresholds]     = useState({ z1: 1.3, z2: 1.3 })
+  const [thresholds,     setThresholds]     = useState({ zest: 1.3 })
   const [dismissed,      setDismissed]      = useState([])
   const [isMobile,       setIsMobile]       = useState(false)
+  const [account,        setAccount]        = useState(null)   // live Zest account data
+  const [posLoading,     setPosLoading]     = useState(false)
+  const [posError,       setPosError]       = useState(null)
 
   // sync ticker
   useEffect(() => {
@@ -46,6 +78,23 @@ export default function Dashboard() {
     document.addEventListener('mousedown', h)
     return () => document.removeEventListener('mousedown', h)
   }, [openDropdownId])
+
+  // fetch live Zest position + health factor whenever the wallet changes
+  useEffect(() => {
+    if (!wallet) { setAccount(null); setPosError(null); return }
+    let cancelled = false
+    setPosLoading(true); setPosError(null)
+    fetch(`/api/positions?wallet=${encodeURIComponent(wallet)}`)
+      .then(r => r.json())
+      .then(data => {
+        if (cancelled) return
+        if (data.error) { setPosError(data.error); setAccount(null) }
+        else setAccount(data)
+      })
+      .catch(() => { if (!cancelled) setPosError('Failed to load on-chain data') })
+      .finally(() => { if (!cancelled) setPosLoading(false) })
+    return () => { cancelled = true }
+  }, [wallet])
 
   const hasWallet = !!wallet
   const noWallet  = !wallet
@@ -83,12 +132,10 @@ export default function Dashboard() {
     { key: 'settings',   label: 'SETTINGS', soon: true },
   ]
 
-  // ── positions ──
-  const POS_DEF = [
-    { id: 'z1', protocol: 'ZEST PROTOCOL', hf: 1.42, collateral: '0.42 sBTC', borrowed: '$2,840', liqPrice: '$58,200', note: `Last updated: ${sync}s ago`, warn: false },
-    { id: 'z2', protocol: 'ZEST PROTOCOL', hf: 1.14, collateral: '0.18 sBTC', borrowed: '$1,200', liqPrice: '$61,400', note: '⚠ sBTC down 4.2% in last 2h', warn: true },
-  ]
-  const lowestHf = Math.min(...POS_DEF.map(p => p.hf))
+  // ── positions (live from Zest v2 mainnet) ──
+  const fmtUSD = (n) => '$' + Math.round(n).toLocaleString('en-US')
+  const positions = accountToPositions(account, sync)
+  const lowestHf = account && account.hf != null ? account.hf : null
   const showPositions = activeNav === 'overview' || activeNav === 'positions'
   const showAlerts    = activeNav === 'overview' || activeNav === 'alerts'
 
@@ -230,20 +277,20 @@ export default function Dashboard() {
             {/* B1 SUMMARY BAR */}
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(150px,1fr))', border: '1px solid rgba(0,0,0,.12)', background: '#E9E7E0', marginBottom: '34px' }}>
               <div style={{ padding: '22px clamp(16px,2.5vw,26px)', borderRight: '1px solid rgba(0,0,0,.1)' }}>
-                <div style={{ fontFamily: "'Space Grotesk'", fontWeight: 700, fontSize: '32px', lineHeight: 1 }}>2</div>
+                <div style={{ fontFamily: "'Space Grotesk'", fontWeight: 700, fontSize: '32px', lineHeight: 1 }}>{posLoading ? '…' : positions.length}</div>
                 <div style={{ fontFamily: "'Space Mono'", fontSize: '9.5px', letterSpacing: '.12em', color: '#8a8a85', marginTop: '7px' }}>POSITIONS MONITORED</div>
               </div>
               <div style={{ padding: '22px clamp(16px,2.5vw,26px)', borderRight: '1px solid rgba(0,0,0,.1)' }}>
-                <div style={{ fontFamily: "'Space Grotesk'", fontWeight: 700, fontSize: '32px', lineHeight: 1, color: hfColor(lowestHf) }}>{lowestHf.toFixed(2)}</div>
+                <div style={{ fontFamily: "'Space Grotesk'", fontWeight: 700, fontSize: '32px', lineHeight: 1, color: lowestHf != null ? hfColor(lowestHf) : '#22C55E' }}>{posLoading ? '…' : lowestHf != null ? lowestHf.toFixed(2) : '∞'}</div>
                 <div style={{ fontFamily: "'Space Mono'", fontSize: '9.5px', letterSpacing: '.12em', color: '#8a8a85', marginTop: '7px' }}>LOWEST HEALTH FACTOR</div>
               </div>
               <div style={{ padding: '22px clamp(16px,2.5vw,26px)', borderRight: '1px solid rgba(0,0,0,.1)' }}>
-                <div style={{ fontFamily: "'Space Grotesk'", fontWeight: 700, fontSize: '32px', lineHeight: 1 }}>3</div>
-                <div style={{ fontFamily: "'Space Mono'", fontSize: '9.5px', letterSpacing: '.12em', color: '#8a8a85', marginTop: '7px' }}>ALERTS TODAY</div>
+                <div style={{ fontFamily: "'Space Grotesk'", fontWeight: 700, fontSize: '32px', lineHeight: 1 }}>{positions.filter(p => p.warn).length}</div>
+                <div style={{ fontFamily: "'Space Mono'", fontSize: '9.5px', letterSpacing: '.12em', color: '#8a8a85', marginTop: '7px' }}>POSITIONS AT RISK</div>
               </div>
               <div style={{ padding: '22px clamp(16px,2.5vw,26px)' }}>
-                <div style={{ fontFamily: "'Space Grotesk'", fontWeight: 700, fontSize: '32px', lineHeight: 1 }}>$12,840</div>
-                <div style={{ fontFamily: "'Space Mono'", fontSize: '9.5px', letterSpacing: '.12em', color: '#8a8a85', marginTop: '7px' }}>TOTAL COLLATERAL (sBTC EQ.)</div>
+                <div style={{ fontFamily: "'Space Grotesk'", fontWeight: 700, fontSize: '32px', lineHeight: 1 }}>{posLoading ? '…' : account ? fmtUSD(account.collateralUSD) : '$0'}</div>
+                <div style={{ fontFamily: "'Space Mono'", fontSize: '9.5px', letterSpacing: '.12em', color: '#8a8a85', marginTop: '7px' }}>TOTAL COLLATERAL (USD)</div>
               </div>
             </div>
 
@@ -256,13 +303,30 @@ export default function Dashboard() {
                 </div>
                 <div style={{ height: '1px', background: 'rgba(0,0,0,.14)', marginBottom: '22px' }} />
 
+                {posLoading && (
+                  <div style={{ padding: '38px 0', display: 'flex', alignItems: 'center', gap: '12px', fontFamily: "'Space Mono'", fontSize: '12px', color: '#8a8a85' }}>
+                    <span style={{ width: '13px', height: '13px', border: '2px solid rgba(0,0,0,.18)', borderTopColor: '#FF5C00', borderRadius: '50%', animation: 'son-spin .7s linear infinite', display: 'inline-block' }} />
+                    Reading live position from Zest v2 on Stacks mainnet…
+                  </div>
+                )}
+                {!posLoading && posError && (
+                  <div style={{ padding: '22px', marginBottom: '40px', background: '#FAFAF7', border: '1px solid rgba(239,68,68,.4)', borderLeft: '3px solid #EF4444', fontFamily: "'Space Mono'", fontSize: '12px', color: '#b4231f' }}>{posError}</div>
+                )}
+                {!posLoading && !posError && positions.length === 0 && (
+                  <div style={{ padding: '34px 22px', marginBottom: '40px', background: '#FAFAF7', border: '1px solid rgba(0,0,0,.14)', fontFamily: "'Space Mono'", fontSize: '12.5px', color: '#6a6a66', lineHeight: 1.6 }}>
+                    No open Zest positions found for this wallet.<br />
+                    <span style={{ color: '#a0a09a' }}>This address has no sBTC collateral or borrow on Zest v2 mainnet.</span>
+                  </div>
+                )}
+                {!posLoading && !posError && positions.length > 0 && (
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(290px,1fr))', gap: '18px', marginBottom: '40px' }}>
-                  {POS_DEF.map(p => {
-                    const color = hfColor(p.hf)
-                    const fill  = Math.max(0, Math.min(1, (p.hf - 1.0) / 1.0))
+                  {positions.map(p => {
+                    const isInf = p.hf == null
+                    const color = isInf ? '#22C55E' : hfColor(p.hf)
+                    const fill  = isInf ? 1 : Math.max(0, Math.min(1, (p.hf - 1.0) / 1.0))
                     const arcOffset = Math.round(100 * (1 - fill))
                     const open  = openDropdownId === p.id
-                    const sel   = thresholds[p.id]
+                    const sel   = thresholds[p.id] ?? 1.3
                     return (
                       <div key={p.id} style={{ position: 'relative', background: '#FAFAF7', border: p.warn ? '1.5px solid rgba(255,92,0,.55)' : '1px solid rgba(0,0,0,.14)', display: 'flex', flexDirection: 'column' }}>
                         <span style={{ position: 'absolute', top: '-1px', left: '-1px', width: '13px', height: '13px', borderTop: '1.5px solid rgba(0,0,0,.4)', borderLeft: '1.5px solid rgba(0,0,0,.4)' }} />
@@ -286,7 +350,7 @@ export default function Dashboard() {
                               <path d="M41,117 A58 58 0 1 1 123,117" pathLength="100" fill="none" stroke={color} strokeWidth="11" strokeLinecap="round" strokeDasharray="100" strokeDashoffset={arcOffset} />
                             </svg>
                             <div style={{ position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', paddingTop: '18px', pointerEvents: 'none' }}>
-                              <div style={{ fontFamily: "'Space Grotesk'", fontWeight: 700, fontSize: '36px', lineHeight: 1, color }}>{p.hf.toFixed(2)}</div>
+                              <div style={{ fontFamily: "'Space Grotesk'", fontWeight: 700, fontSize: isInf ? '40px' : '36px', lineHeight: 1, color }}>{isInf ? '∞' : p.hf.toFixed(2)}</div>
                               <div style={{ fontFamily: "'Space Mono'", fontSize: '9px', letterSpacing: '.14em', color: '#8a8a85', marginTop: '6px' }}>HEALTH FACTOR</div>
                             </div>
                           </div>
@@ -337,6 +401,7 @@ export default function Dashboard() {
                     )
                   })}
                 </div>
+                )}
               </>
             )}
 
