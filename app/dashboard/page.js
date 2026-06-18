@@ -279,15 +279,15 @@ export default function Dashboard() {
                         <div style={{ height: '1px', background: 'rgba(0,0,0,.1)', margin: '0 20px' }} />
 
                         {/* gauge */}
-                        <div style={{ display: 'flex', justifyContent: 'center', padding: '22px 0 8px' }}>
-                          <div style={{ position: 'relative', width: '164px', height: '134px' }}>
+                        <div style={{ display: 'flex', justifyContent: 'center', padding: '20px 0 6px' }}>
+                          <div style={{ position: 'relative', width: '130px', height: '106px' }}>
                             <svg viewBox="0 0 164 134" style={{ width: '100%', height: '100%', display: 'block' }}>
                               <path d="M41,117 A58 58 0 1 1 123,117" fill="none" stroke="#E1DFD8" strokeWidth="11" strokeLinecap="round" />
                               <path d="M41,117 A58 58 0 1 1 123,117" pathLength="100" fill="none" stroke={color} strokeWidth="11" strokeLinecap="round" strokeDasharray="100" strokeDashoffset={arcOffset} />
                             </svg>
-                            <div style={{ position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', paddingTop: '18px', pointerEvents: 'none' }}>
-                              <div style={{ fontFamily: "'Space Grotesk'", fontWeight: 700, fontSize: '36px', lineHeight: 1, color }}>{p.hf.toFixed(2)}</div>
-                              <div style={{ fontFamily: "'Space Mono'", fontSize: '9px', letterSpacing: '.14em', color: '#8a8a85', marginTop: '6px' }}>HEALTH FACTOR</div>
+                            <div style={{ position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', paddingTop: '12px', pointerEvents: 'none' }}>
+                              <div style={{ fontFamily: "'Space Grotesk'", fontWeight: 600, fontSize: '22px', lineHeight: 1, color }}>{p.hf.toFixed(2)}</div>
+                              <div style={{ fontFamily: "'Space Mono'", fontSize: '8px', letterSpacing: '.12em', color: '#8a8a85', marginTop: '5px' }}>HEALTH FACTOR</div>
                             </div>
                           </div>
                         </div>
