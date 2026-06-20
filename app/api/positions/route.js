@@ -2,15 +2,11 @@
 // GET /api/positions?wallet=SP...  → live Zest health-factor for a wallet.
 
 import { NextResponse } from 'next/server'
-import { principalCV } from '@stacks/transactions'
-import { getZestAccount } from '../../lib/zest'
+// Single source of truth — same module the Telegram backend reads from.
+import { getZestAccount, isValidStacksAddress } from '../../../src/lib/stacks'
 
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
-
-function isValidStacksAddress(addr) {
-  try { principalCV(addr); return true } catch { return false }
-}
 
 export async function GET(request) {
   const wallet = request.nextUrl.searchParams.get('wallet')?.trim()

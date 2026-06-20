@@ -207,7 +207,7 @@ export default function Dashboard() {
             <div style={{ fontFamily: "'Space Mono'", fontSize: '10.5px', color: '#8c8c88', marginBottom: '18px' }}>Last sync: {sync}s ago</div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', fontFamily: "'Space Mono'", fontSize: '11px', color: '#b6b6b2' }}>
               <a href="https://x.com/sonaragent_" target="_blank" rel="noopener noreferrer" className="son-sidebar-link" style={{ color: '#b6b6b2', textDecoration: 'none' }}>X / Twitter ↗</a>
-              <a href="#" className="son-sidebar-link" style={{ color: '#b6b6b2', textDecoration: 'none' }}>Telegram ↗</a>
+              <a href="https://t.me/sonaragent" target="_blank" rel="noopener noreferrer" className="son-sidebar-link" style={{ color: '#b6b6b2', textDecoration: 'none' }}>Telegram ↗</a>
             </div>
           </div>
         )}

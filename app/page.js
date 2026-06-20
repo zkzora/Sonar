@@ -3,6 +3,11 @@
 import { useState, useEffect, useRef } from 'react'
 import Image from 'next/image'
 
+// External subdomains (set in Vercel env for production). Falls back to the
+// in-repo /dashboard route locally so dev keeps working.
+const APP_URL  = process.env.NEXT_PUBLIC_APP_URL  || '/dashboard'
+const DOCS_URL = process.env.NEXT_PUBLIC_DOCS_URL || 'https://docs.sonaragent.xyz'
+
 const STEPS = [
   { n: '01', title: 'READ', body: 'Sonar reads your position state directly from Clarity contracts on Stacks — health factor, collateral ratio, borrow rate — in real time.', note: 'No wallet connection required to monitor.' },
   { n: '02', title: 'COMPUTE', body: "The agent continuously calculates your health factor and tracks what's driving changes: sBTC price movement, rising borrow rates, or both.", note: 'You see the cause, not just the number.' },
@@ -113,10 +118,13 @@ export default function Home() {
             <span style={{ fontFamily: "'Space Grotesk'", fontWeight: 700, fontSize: '19px', letterSpacing: '.22em' }}>SONAR</span>
           </a>
           <div style={{ display: 'flex', alignItems: 'center', gap: 'clamp(14px,3vw,28px)' }}>
+            <a href={DOCS_URL} target="_blank" rel="noopener noreferrer" className="son-link-underline" style={{ fontFamily: "'Space Mono', monospace", fontSize: '12px', letterSpacing: '.06em', color: '#444' }}>
+              Docs <span style={{ fontSize: '11px' }}>↗</span>
+            </a>
             <a href="https://x.com/sonaragent_" target="_blank" rel="noopener noreferrer" className="son-link-underline" style={{ fontFamily: "'Space Mono', monospace", fontSize: '12px', letterSpacing: '.06em', color: '#444' }}>
               X / Twitter <span style={{ fontSize: '11px' }}>↗</span>
             </a>
-            <a href="#" className="son-btn-orange-sm" style={{ fontFamily: "'Space Mono', monospace", fontSize: '12px', letterSpacing: '.08em', textTransform: 'uppercase', background: '#FF5C00', color: '#fff', padding: '10px 16px', borderRadius: '3px', display: 'inline-flex', alignItems: 'center', gap: '8px', whiteSpace: 'nowrap' }}>
+            <a href="https://t.me/sonaragent" target="_blank" rel="noopener noreferrer" className="son-btn-orange-sm" style={{ fontFamily: "'Space Mono', monospace", fontSize: '12px', letterSpacing: '.08em', textTransform: 'uppercase', background: '#FF5C00', color: '#fff', padding: '10px 16px', borderRadius: '3px', display: 'inline-flex', alignItems: 'center', gap: '8px', whiteSpace: 'nowrap' }}>
               Join Telegram <span style={{ fontSize: '13px' }}>→</span>
             </a>
           </div>
@@ -148,8 +156,8 @@ export default function Home() {
                 Sonar monitors your sBTC lending positions on Stacks and alerts you before liquidation — with an explanation of <em style={{ fontStyle: 'normal', color: '#0D0D0D', borderBottom: '1.5px solid #FF5C00' }}>why</em> your health is dropping, not just that it is.
               </p>
               <div style={{ display: 'flex', gap: '14px', flexWrap: 'wrap', marginBottom: '38px' }}>
-                <a href="/dashboard" className="son-btn-orange" style={{ display: 'inline-flex', alignItems: 'center', gap: '9px', background: '#FF5C00', color: '#fff', fontWeight: 600, fontSize: '15px', padding: '15px 26px', borderRadius: '3px' }}>→ Connect Position</a>
-                <a href="#" className="son-btn-outline-dark" style={{ display: 'inline-flex', alignItems: 'center', gap: '9px', border: '1px solid rgba(0,0,0,.85)', color: '#0D0D0D', fontWeight: 500, fontSize: '15px', padding: '15px 26px', borderRadius: '3px' }}>Join Telegram <span style={{ fontSize: '13px' }}>↗</span></a>
+                <a href={APP_URL} className="son-btn-orange" style={{ display: 'inline-flex', alignItems: 'center', gap: '9px', background: '#FF5C00', color: '#fff', fontWeight: 600, fontSize: '15px', padding: '15px 26px', borderRadius: '3px' }}>→ Connect Position</a>
+                <a href="https://t.me/sonaragent" target="_blank" rel="noopener noreferrer" className="son-btn-outline-dark" style={{ display: 'inline-flex', alignItems: 'center', gap: '9px', border: '1px solid rgba(0,0,0,.85)', color: '#0D0D0D', fontWeight: 500, fontSize: '15px', padding: '15px 26px', borderRadius: '3px' }}>Join Telegram <span style={{ fontSize: '13px' }}>↗</span></a>
               </div>
               <div style={{ display: 'flex', flexWrap: 'wrap', borderTop: '1px solid rgba(0,0,0,.1)' }}>
                 <div style={{ flex: '1 1 110px', padding: '14px 16px 0 0', borderRight: '1px solid rgba(0,0,0,.1)' }}><div style={{ fontFamily: "'Space Mono'", fontSize: '10px', letterSpacing: '.1em', color: '#a0a09a', marginBottom: '4px' }}>PROTOCOL</div><div style={{ fontFamily: "'Space Mono'", fontSize: '13px', fontWeight: 700 }}>ZEST</div></div>
@@ -425,14 +433,14 @@ export default function Home() {
             <div style={{ fontFamily: "'Space Grotesk'", fontWeight: 700, fontSize: 'clamp(26px,4vw,40px)', color: '#FF5C00', marginTop: '14px', letterSpacing: '-.01em' }}>Sonar will.</div>
           </div>
           <div data-reveal="1" data-reveal-delay="120" style={{ display: 'flex', gap: '14px', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '60px' }}>
-            <a href="/dashboard" className="son-btn-orange" style={{ background: '#FF5C00', color: '#fff', fontWeight: 600, fontSize: '15px', padding: '15px 28px', borderRadius: '3px' }}>→ Start Monitoring</a>
-            <a href="#" className="son-btn-outline-white" style={{ border: '1px solid rgba(255,255,255,.4)', color: '#fff', fontWeight: 500, fontSize: '15px', padding: '15px 28px', borderRadius: '3px' }}>Join Telegram ↗</a>
+            <a href={APP_URL} className="son-btn-orange" style={{ background: '#FF5C00', color: '#fff', fontWeight: 600, fontSize: '15px', padding: '15px 28px', borderRadius: '3px' }}>→ Start Monitoring</a>
+            <a href="https://t.me/sonaragent" target="_blank" rel="noopener noreferrer" className="son-btn-outline-white" style={{ border: '1px solid rgba(255,255,255,.4)', color: '#fff', fontWeight: 500, fontSize: '15px', padding: '15px 28px', borderRadius: '3px' }}>Join Telegram ↗</a>
           </div>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px', padding: '22px 0', borderTop: '1px solid rgba(255,255,255,.14)' }}>
             <div style={{ fontFamily: "'Space Mono'", fontSize: '11.5px', letterSpacing: '.08em', color: '#9a9a96' }}>SONAR · Built on Stacks · Non-custodial</div>
             <div style={{ display: 'flex', gap: '22px', fontFamily: "'Space Mono'", fontSize: '11.5px', letterSpacing: '.08em', color: '#cfcfca' }}>
               <a href="https://x.com/sonaragent_" target="_blank" rel="noopener noreferrer" className="son-sidebar-link">X / Twitter ↗</a>
-              <a href="#" className="son-sidebar-link">Telegram ↗</a>
+              <a href="https://t.me/sonaragent" target="_blank" rel="noopener noreferrer" className="son-sidebar-link">Telegram ↗</a>
             </div>
           </div>
           <div style={{ fontFamily: "'Space Mono'", fontSize: '11px', color: '#6a6a66', padding: '18px 0 30px' }}>© 2026 Sonar. Not financial advice. Best-effort monitoring only.</div>

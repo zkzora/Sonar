@@ -5,12 +5,19 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "check": "tsx scripts/check.ts"
   },
   "dependencies": {
     "@stacks/transactions": "^7.4.0",
     "next": "^16.2.9",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "@types/react": "19.2.17",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2"
   }
 }
