@@ -156,7 +156,7 @@ export default function Home() {
                 Sonar monitors your sBTC lending positions on Stacks and alerts you before liquidation — with an explanation of <em style={{ fontStyle: 'normal', color: '#0D0D0D', borderBottom: '1.5px solid #FF5C00' }}>why</em> your health is dropping, not just that it is.
               </p>
               <div style={{ display: 'flex', gap: '14px', flexWrap: 'wrap', marginBottom: '38px' }}>
-                <a href={APP_URL} className="son-btn-orange" style={{ display: 'inline-flex', alignItems: 'center', gap: '9px', background: '#FF5C00', color: '#fff', fontWeight: 600, fontSize: '15px', padding: '15px 26px', borderRadius: '3px' }}>→ Connect Position</a>
+                <a href={APP_URL} target="_blank" rel="noopener noreferrer" className="son-btn-orange" style={{ display: 'inline-flex', alignItems: 'center', gap: '9px', background: '#FF5C00', color: '#fff', fontWeight: 600, fontSize: '15px', padding: '15px 26px', borderRadius: '3px' }}>→ Connect Position</a>
                 <a href="https://t.me/sonaragent" target="_blank" rel="noopener noreferrer" className="son-btn-outline-dark" style={{ display: 'inline-flex', alignItems: 'center', gap: '9px', border: '1px solid rgba(0,0,0,.85)', color: '#0D0D0D', fontWeight: 500, fontSize: '15px', padding: '15px 26px', borderRadius: '3px' }}>Join Telegram <span style={{ fontSize: '13px' }}>↗</span></a>
               </div>
               <div style={{ display: 'flex', flexWrap: 'wrap', borderTop: '1px solid rgba(0,0,0,.1)' }}>
@@ -433,7 +433,7 @@ export default function Home() {
             <div style={{ fontFamily: "'Space Grotesk'", fontWeight: 700, fontSize: 'clamp(26px,4vw,40px)', color: '#FF5C00', marginTop: '14px', letterSpacing: '-.01em' }}>Sonar will.</div>
           </div>
           <div data-reveal="1" data-reveal-delay="120" style={{ display: 'flex', gap: '14px', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '60px' }}>
-            <a href={APP_URL} className="son-btn-orange" style={{ background: '#FF5C00', color: '#fff', fontWeight: 600, fontSize: '15px', padding: '15px 28px', borderRadius: '3px' }}>→ Start Monitoring</a>
+            <a href={APP_URL} target="_blank" rel="noopener noreferrer" className="son-btn-orange" style={{ background: '#FF5C00', color: '#fff', fontWeight: 600, fontSize: '15px', padding: '15px 28px', borderRadius: '3px' }}>→ Start Monitoring</a>
             <a href="https://t.me/sonaragent" target="_blank" rel="noopener noreferrer" className="son-btn-outline-white" style={{ border: '1px solid rgba(255,255,255,.4)', color: '#fff', fontWeight: 500, fontSize: '15px', padding: '15px 28px', borderRadius: '3px' }}>Join Telegram ↗</a>
           </div>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px', padding: '22px 0', borderTop: '1px solid rgba(255,255,255,.14)' }}>
