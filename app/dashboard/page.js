@@ -42,9 +42,10 @@ function accountToPositions(acc, sync) {
 }
 
 export default function Dashboard() {
+  // Example address users can try with one click (no auto-connect on load).
   const SAMPLE_WALLET = 'SP2GHQRCRMYY4S8PMBR49BEKX144VR437YT42SF3B'
 
-  const [wallet,         setWallet]         = useState(SAMPLE_WALLET)
+  const [wallet,         setWallet]         = useState(null)
   const [inputVal,       setInputVal]       = useState('')
   const [loading,        setLoading]        = useState(false)
   const [activeNav,      setActiveNav]      = useState('overview')
@@ -261,6 +262,12 @@ export default function Dashboard() {
                 {loading
                   ? <span style={{ display: 'inline-flex', alignItems: 'center', gap: '10px' }}><span style={{ width: '13px', height: '13px', border: '2px solid rgba(255,255,255,.4)', borderTopColor: '#fff', borderRadius: '50%', animation: 'son-spin .7s linear infinite', display: 'inline-block' }} />SYNCING…</span>
                   : <span>→ Start Monitoring</span>}
+              </button>
+              <button
+                onClick={() => setInputVal(SAMPLE_WALLET)}
+                style={{ marginTop: '12px', width: '100%', border: 'none', background: 'none', color: '#8a8a85', fontFamily: "'Space Mono', monospace", fontSize: '11.5px', letterSpacing: '.02em', cursor: 'pointer', textAlign: 'center' }}
+              >
+                ↳ Try an example address
               </button>
               <div style={{ marginTop: '24px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
                 <div style={{ display: 'flex', alignItems: 'flex-start', gap: '10px', fontSize: '13.5px', color: '#6a6a66' }}><span style={{ color: '#FF5C00', fontSize: '9px', marginTop: '5px' }}>○</span>No wallet connection needed.</div>
